@@ -1,0 +1,9 @@
+{% if infos == null %}
+- no result -
+{% else %}
+    {% for info in infos %}
+        {% include "@Celebrity/cnResult.html.twig" %}
+    {% endfor %}
+{% endif %}
+
+

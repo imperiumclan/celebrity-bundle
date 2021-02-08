@@ -1,0 +1,16 @@
+.card > .card-img-overlay {
+
+    opacity: 0;
+
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+    transition-delay: .3s;
+
+}
+
+.card:hover > .card-img-overlay {
+
+    opacity: 1;
+
+}

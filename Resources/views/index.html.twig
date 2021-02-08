@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row my-3">
+        <div class="col-12">
+            <h1><i class="fa fa-users"></i> Celebrities <a class="btn btn-primary float-right" href="{{ path('ics_celebrity_add') }}"><i class="fa fa-plus"></i></a></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {% for celebs in celebrities|batch(6) %}
+                <div class="card-deck my-3">
+                {% set complete = 0 %}
+                    {% for celebrity in celebs %}
+
+                        <div class="card">
+                        {% if celebrity.Representative %}
+                            <img class="card-img-top" src="{{ asset(celebrity.representative.assetPath) }}"/>
+                        {% endif %}
+                            <div class="card-body">
+                                <a href="{{ path('ics_celebrity_show',{id: celebrity.id}) }}">
+                                    <h5 class="card-title">{{ celebrity.fullname }}</h5>
+                                </a>
+                                <div class="text-muted">{{ celebrity.gallery|length }} pictures</div>
+                                <p>{{ celebrity.biography|raw }}</p>
+                            </div>
+                        </div>
+                        {% set complete = 6 - loop.index %}
+                    {% endfor %}
+                    {% if complete > 0 %}
+                        {% for item in 1..complete %}
+                            <div class="card border-0"></div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}<link href="/bundles/celebrity/css/celebrity.css" rel="stylesheet" type="text/css" />{% endblock %}
+
+{% block javascripts %}<script src="/bundles/celebrity/js/celebrity.js"></script>{% endblock %}

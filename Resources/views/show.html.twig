@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div id="celebrity" data-id="{{ celebrity.id }}" class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>
+                    <i class="fa fa-user"></i> {{ celebrity.fullname }}
+                    {% if celebrity.fullname != (celebrity.name ~ ' ' ~ celebrity.surname) %}
+                        <small class="text-muted">{{ celebrity.name }} {{ celebrity.surname }}</small>
+                    {% endif %}
+
+                    <div class="btn-group float-right my-3">
+                        <a class="btn btn-primary" href="{{ path('ics_celebrity_homepage') }}"><i class="fa fa-arrow-left"></i></a>
+                        <a class="btn btn-warning" href="{{ path('ics_celebrity_edit',{ id : celebrity.id}) }}"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger" href="{{ path('ics_celebrity_edit',{ id : celebrity.id}) }}"><i class="fa fa-trash"></i></a>
+                    </div>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <h2 class="my-3"><i class="fa fa-info-circle"></i> Informations</h2>
+                <table class="table table-bordered">
+                    <tr>
+                        <th class="bg-dark text-light">Birthday</th>
+                        <td>{{ celebrity.birthday|date('d/m/Y') }} ({{ celebrity.age }} ans)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-9">
+                 <h2 class="my-3"><i class="fas fa-clipboard-list"></i> Biography</h2>
+                {{ celebrity.biography|raw }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        {% for key,i in images %}
+        {% if i|length > 0 %}
+            <h2>{{ key }} <small class="text-muted">{{ i|length ~ ' résultats' }}</small></h2>
+            {% for key,imgs in i|batch(6) %}
+                <div class="card-deck my-3">
+                    {% set complete = 0 %}
+                    {% for image in imgs %}
+                        <div class="card">
+                            <img class="card-img-top" src="{{ image.media_preview }}"/>
+                            <div class="card-img-overlay text-right">
+                                <span class="btn-group ">
+                                    <a href="{{ image.media_fullsize }}" target="_blank" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <button class="img-download btn btn-primary" data-src="{{ image.media_fullsize }}"><i class="fa fa-download"></i></button>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ image.title|raw }}</h4>
+                                <div class="text-muted">Size : {{ image.width }} x {{ image.height }}</div>
+                            </div>
+                        </div>
+                        {% set complete = 6 - loop.index %}
+
+                    {% endfor %}
+
+                    {% if complete > 0 %}
+                        {% for item in 1..complete %}
+                            <div class="card border-0"></div>
+                        {% endfor %}
+                    {% endif %}
+
+
+                </div>
+            {% endfor %}
+        {% endif %}
+{% endfor %}
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-12">
+                {# {{ dump(images) }} #}
+            </div>
+        </div>
+    </>
+{% endblock %}
+{% block stylesheets %}<link href="/bundles/celebrity/css/celebrity.css" rel="stylesheet" type="text/css" />{% endblock %}
+{% block javascripts %}
+    <script src="/bundles/celebrity/js/celebrity.js"></script>
+    <script>
+        $(document).ready(function(){
+
+             $('.img-download').click(function() {
+
+                var imgUrl = $(this).attr('data-src');
+                var imgButton = $(this);
+                var parent = $(this).parent().parent()
+                parent.html('<div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"><span class="sr-only">Loading...</span></div>');
+                $.ajax({
+                    url: '{{ path('ics_celebrity_download', { 'id' : celebrity.id}) }}',
+                    data: {
+                        'mediaUrl': imgUrl
+                    }
+                }).done(function(data){
+                    if(data == "ok")
+                    {
+                        parent.html('Downloaded');
+                        parent.addClass('disabeld');
+                    }
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

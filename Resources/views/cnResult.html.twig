@@ -1,0 +1,10 @@
+<div class="">{{dump(info)}}</div>
+{% if info.gender == 'male' %}
+    <i class="fa fa-mars text-primary"></i>
+{% else %}
+    <i class="fa fa-venus text-pink"></i>
+{% endif %}
+{{ info.name }}
+{{ info.birthday|date('d/m/Y') }} ( {{ info.age }} )
+{{ info.nationality }}
+

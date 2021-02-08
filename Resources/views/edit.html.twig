@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1><i class="fa fa-plus"></i> Add new celebrity</h1>
+        </div>
+    </div>
+    <div class="row">
+        <fieldset class="col-12 col-md-6">
+            <legend>New celebrity</legend>
+            <div class="container-fluid">
+
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-12">
+                        {{ form_row(form.fullname)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">{{ form_row(form.name)}}</div>
+                    <div class="col-12 col-md-6">{{ form_row(form.surname)}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">{{ form_row(form.birthDay)}}</div>
+                    <div class="col-12 col-md-6">{{ form_row(form.deathDay)}}</div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </fieldset>
+         <fieldset class="col-12 col-md-6">
+            <legend>Internet Infos search</legend>
+            <div id="celebrityninjas"></div>
+        </fieldset>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+
+            $('#celebrity_fullname').change(function(){
+                $('#celebrityninjas').html('<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>');
+                $.ajax({
+                    url: "{{ path('ics_celebrity_cn_search') }}",
+                    method: 'POST',
+                    data:{
+                        search:$(this).val()
+                    }
+                }).done(function(data){
+
+                    $('#celebrityninjas').html(data);
+                });
+
+            });
+
+        });
+
+    </script>
+{% endblock %}

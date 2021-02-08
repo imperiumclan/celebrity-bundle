@@ -1,0 +1,21 @@
+navigation:
+  navbars:
+    mainnav:
+      items:
+        celebrity:
+          lib: Celebrities
+          icon: fa fa-users
+          route: ics_celebrity_homepage
+          childs:
+            celebrity_homepage:
+              lib: Celebrity list
+              icon: fas fa-columns
+              route: ics_celebrity_homepage
+            divider1:
+              lib: divider
+            social_instagram:
+              lib: Add celebrity
+              icon: fa fa-plus
+              route: ics_celebrity_add
+          roles:
+              - ROLE_ADMIN
