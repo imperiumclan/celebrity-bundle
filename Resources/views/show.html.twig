@@ -35,6 +35,19 @@
         </div>
         <div class="row">
             <div class="col-12">
+                <h2 class="my-3"><i class="fa fa-images"></i> Gallery</h2>
+                <div id="gallery">
+                    {% for image in celebrity.gallery %}
+                        <a href="{{ asset(image.assetPath) }}" data-fancybox="gallery" >
+                            <img src="{{ asset(image.assetPath)| imagine_filter('celebrityBundleThumbnail') }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+            <h2 class="my-3"><i class="fa fa-globe"></i> Internet Search</h2>
         {% for key,i in images %}
         {% if i|length > 0 %}
             <h2>{{ key }} <small class="text-muted">{{ i|length ~ ' résultats' }}</small></h2>
@@ -79,9 +92,17 @@
         </div>
     </>
 {% endblock %}
-{% block stylesheets %}<link href="/bundles/celebrity/css/celebrity.css" rel="stylesheet" type="text/css" />{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/celebrity/css/celebrity.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/bundles/celebrity/libs/justifiedGallery/justifiedGallery.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/bundles/celebrity/libs/fancybox/jquery.fancybox.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 {% block javascripts %}
-    <script src="/bundles/celebrity/js/celebrity.js"></script>
+    <script src="{{ asset('/bundles/celebrity/js/celebrity.js') }}"></script>
+    <script src="{{ asset('/bundles/celebrity/libs/justifiedGallery/jquery.justifiedGallery.min.js') }}"></script>
+    <script src="{{ asset('/bundles/celebrity/libs/fancybox/jquery.fancybox.min.js') }}"></script>
+
+
     <script>
         $(document).ready(function(){
 
@@ -105,6 +126,10 @@
                 });
             });
 
+            $("#gallery").justifiedGallery();
+            $('[data-fancybox="gallery"]').fancybox({
+                // Options will go here
+            });
         });
     </script>
 {% endblock %}

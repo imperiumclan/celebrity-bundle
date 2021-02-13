@@ -1,0 +1,9 @@
+liip_imagine:
+  filter_sets:
+    celebrityBundleThumbnail:
+      filters:
+          thumbnail: { size: [100,~], mode: outbound }
+
+    celebrityBundleMini:
+      filters:
+          thumbnail: { size: [200,200], mode: outbound }

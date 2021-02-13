@@ -40,8 +40,8 @@ class CelebrityExtension extends Extension implements PrependExtensionInterface
             $loader->load('ckeditor.yaml');
         }
 
-        // if (isset($bundles['LiipImagineBundle'])) {
-        //     $loader->load('liip_imagine.yaml');
-        // }
+        if (isset($bundles['LiipImagineBundle'])) {
+            $loader->load('liip_imagine.yaml');
+        }
     }
 }
