@@ -1,4 +1,5 @@
-<div class="">{{dump(info)}}</div>
+{# <div class="">{{dump(info)}}</div> #}
+<span class="flag-icon flag-icon-{{ info.nationality }}"></span>
 {% if info.gender == 'male' %}
     <i class="fa fa-mars text-primary"></i>
 {% else %}
@@ -6,5 +7,5 @@
 {% endif %}
 {{ info.name }}
 {{ info.birthday|date('d/m/Y') }} ( {{ info.age }} )
-{{ info.nationality }}
+
 

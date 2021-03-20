@@ -16,14 +16,18 @@
 
                         <div class="card">
                         {% if celebrity.Representative %}
-                            <img class="card-img-top" src="{{ asset(celebrity.representative.assetPath) }}"/>
+                            <img class="card-img-top" src="{{ celebrity.representative.assetPath| imagine_filter('celebrityBundleMini') }}"/>
                         {% endif %}
                             <div class="card-body">
                                 <a href="{{ path('ics_celebrity_show',{id: celebrity.id}) }}">
-                                    <h5 class="card-title">{{ celebrity.fullname }}</h5>
+                                    <h5 class="card-title">
+                                    {{ celebrity.fullname }}
+                                    <span class="flag-icon flag-icon-{{ celebrity.nationality|lower }} float-right"></span>
+                                    </h5>
                                 </a>
+
                                 <div class="text-muted">{{ celebrity.gallery|length }} pictures</div>
-                                <p>{{ celebrity.biography|raw }}</p>
+                                <p>{{ celebrity.biography|striptags|trim|u.truncate(250, true, '...',false)|raw }}</p>
                             </div>
                         </div>
                         {% set complete = 6 - loop.index %}

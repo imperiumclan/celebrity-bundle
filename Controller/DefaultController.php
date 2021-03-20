@@ -19,7 +19,7 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request)
     {
-        $celebrities = $this->getDoctrine()->getRepository(Celebrity::class)->findAll();
+        $celebrities = $this->getDoctrine()->getRepository(Celebrity::class)->findBy([], ['fullname' => 'ASC']);
 
         return $this->render('@Celebrity/index.html.twig', [
             'celebrities' => $celebrities,

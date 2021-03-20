@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class CelebrityType extends AbstractType
 {
@@ -24,6 +25,9 @@ class CelebrityType extends AbstractType
                 'required' => false
             ])
             ->add('surname', TextType::class, [
+                'required' => false
+            ])
+            ->add('nationality', CountryType::class, [
                 'required' => false
             ])
             ->add('birthDay', BirthdayType::class, [

@@ -26,6 +26,10 @@
                         <th class="bg-dark text-light">Birthday</th>
                         <td>{{ celebrity.birthday|date('d/m/Y') }} ({{ celebrity.age }} ans)</td>
                     </tr>
+                    <tr>
+                        <th class="bg-dark text-light">Nationality</th>
+                        <td><span class="flag-icon flag-icon-{{ celebrity.nationality|lower }}"></td>
+                    </tr>
                 </table>
             </div>
             <div class="col-9">

@@ -5,10 +5,19 @@ namespace ICS\CelebrityBundle\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(schema="celebrities")
+ *
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
+ * @ApiFilter(SearchFilter::class, properties={"id":"exact", "fullname":"partial", "name":"partial", "surname":"partial"})
  */
 class Celebrity
 {
@@ -42,6 +51,10 @@ class Celebrity
      * @ORM\Column(type="text", nullable=true)
      */
     private $biography;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $nationality;
 
     /**
      *@ORM\ManyToMany(targetEntity="ICS\MediaBundle\Entity\MediaImage", cascade={"persist","remove"})
@@ -209,5 +222,25 @@ class Celebrity
         }
 
         return null;
+    }
+
+    /**
+     * Get the value of nationality
+     */
+    public function getNationality()
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * Set the value of nationality
+     *
+     * @return  self
+     */
+    public function setNationality($nationality)
+    {
+        $this->nationality = $nationality;
+
+        return $this;
     }
 }

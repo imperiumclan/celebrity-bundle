@@ -2,7 +2,7 @@
     "name": "ics/celebrity-bundle",
     "description": "Celebrity management",
     "type": "symfony-bundle",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -23,7 +23,22 @@
         "symfony/http-client": "^5",
         "imperiumclan/search-bundle": "^1.0",
         "symfony/form": "^5",
-        "friendsofsymfony/ckeditor-bundle": "^2.3"
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
+        "api-platform/core": "^2.6",
+        "nelmio/cors-bundle": "^2.1",
+        "symfony/asset": "^5",
+        "symfony/expression-language": "^5",
+        "symfony/proxy-manager-bridge": "^5",
+        "symfony/security-bundle": "^5",
+        "doctrine/annotations": "^1.0",
+        "phpdocumentor/reflection-docblock": "^5.2",
+        "symfony/property-access": "^5",
+        "symfony/property-info": "^5",
+        "symfony/serializer": "^5",
+        "symfony/twig-bundle": "^5",
+        "symfony/validator": "^5",
+        "liip/imagine-bundle": "^2.5",
+        "twig/string-extra": "^3.3"
     },
     "scripts": {
         "auto-scripts": {
@@ -32,6 +47,7 @@
         }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.2"
+        "symfony/phpunit-bridge": "^5.2",
+        "doctrine/doctrine-fixtures-bundle": "^3.4"
     }
 }
