@@ -38,7 +38,8 @@
         "symfony/twig-bundle": "^5",
         "symfony/validator": "^5",
         "liip/imagine-bundle": "^2.5",
-        "twig/string-extra": "^3.3"
+        "twig/string-extra": "^3.3",
+        "easycorp/easyadmin-bundle": "^3.2"
     },
     "scripts": {
         "auto-scripts": {

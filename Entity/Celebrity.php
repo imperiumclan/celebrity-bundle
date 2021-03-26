@@ -57,7 +57,13 @@ class Celebrity
     private $nationality;
 
     /**
-     *@ORM\ManyToMany(targetEntity="ICS\MediaBundle\Entity\MediaImage", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="ICS\MediaBundle\Entity\MediaImage", cascade={"persist","remove"})
+     */
+    private $representative;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ICS\MediaBundle\Entity\MediaImage", cascade={"persist","remove"})
      */
     private $gallery;
 
@@ -215,15 +221,6 @@ class Celebrity
         return $this->gallery;
     }
 
-    public function getRepresentative()
-    {
-        if (count($this->getGallery()) > 0) {
-            return $this->gallery[0];
-        }
-
-        return null;
-    }
-
     /**
      * Get the value of nationality
      */
@@ -240,6 +237,25 @@ class Celebrity
     public function setNationality($nationality)
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    /**
+     * Get
+     */
+    public function getRepresentative()
+    {
+        return $this->representative;
+    }
+
+    /**
+     * Set
+     * @return  self
+     */
+    public function setRepresentative($representative)
+    {
+        $this->representative = $representative;
 
         return $this;
     }
